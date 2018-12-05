@@ -34,6 +34,9 @@ public class DoodleView extends View {
    private final Map<Integer, Path> pathMap = new HashMap<>();
    private final Map<Integer, Point> previousPointMap =  new HashMap<>();
 
+   // background color
+   private int backgroundColor = Color.WHITE;
+
    // DoodleView constructor initializes the DoodleView
    public DoodleView(Context context, AttributeSet attrs) {
       super(context, attrs); // pass context to View's constructor
@@ -48,14 +51,27 @@ public class DoodleView extends View {
       paintLine.setStrokeCap(Paint.Cap.ROUND); // rounded line ends
    }
 
+
+
    // creates Bitmap and Canvas based on View's size
    @Override
-   public void onSizeChanged(int w, int h, int oldW, int oldH) {
+   public void onSizeChanged(int w, int h, int oldW, int oldH ) {
       bitmap = Bitmap.createBitmap(getWidth(), getHeight(),
          Bitmap.Config.ARGB_8888);
       bitmapCanvas = new Canvas(bitmap);
       bitmap.eraseColor(Color.WHITE); // erase the Bitmap with white
+
    }
+
+   @Override
+   public void onWindowFocusChanged(boolean isVisible){
+      super.onWindowFocusChanged(isVisible);
+      bitmap = Bitmap.createBitmap(getWidth(), getHeight(),
+              Bitmap.Config.ARGB_8888);
+
+      bitmap.eraseColor(backgroundColor); // erase the Bitmap with white
+   }
+
 
    // clear the painting
    public void clear() {
@@ -63,6 +79,11 @@ public class DoodleView extends View {
       previousPointMap.clear(); // remove all previous points
       bitmap.eraseColor(Color.WHITE); // clear the bitmap
       invalidate(); // refresh the screen
+   }
+
+   //set the background color
+   public  void setBackgroundColor(int color){
+      backgroundColor = color;
    }
 
    // set the painted line's color

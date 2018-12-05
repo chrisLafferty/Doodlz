@@ -57,10 +57,10 @@ public class BackgroundColorFragment extends DialogFragment {
        blueSeekBar.setProgress(Color.blue(color));
 
        // add Set Color Button
-       builder.setPositiveButton(R.string.button_set_color,
+       builder.setPositiveButton(R.string.button_set_backgroundColor,
                new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
-                       doodleView.setDrawingColor(color);
+                       doodleView.setBackgroundColor(color);
 
                    }
                }
